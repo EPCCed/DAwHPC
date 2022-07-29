@@ -26,11 +26,11 @@ Clone the DAwHPC git repo.
 
 ## Start a Spark cluster
 
-Modify the slurm script: add the correct account code to `#SBATCH --account=` and define the correct location for `$WORK_DIR`.
+Modify the slurm script: add the correct account code to `#SBATCH --account=` and define the correct location for `$WORK_DIR`. Choose the size of your cluster by specifying the number of nodes `#SBATCH --nodes=<N>`. The cluster created by the script will have one master node and `N-1` worker nodes. Adjust other slurm parameters such as time, partition and qos as required.
 
 Then submit the job:
 ```
-sbatch $WORK_DIR spark_cluster.slurm
+sbatch $WORK_DIR/spark_cluster.slurm
 ```
 The log file is going to show the paths of the Spark worker and master log files. You can watch those to see that the cluster is starting up correctly and that the worker nodes register with the master.
 
@@ -48,7 +48,7 @@ r1i5n2
 
 ## Submit a test job to the Spark cluster
 
-Spark comes with a number of examples. For example, to run SparkPi:
+Spark comes with a number of examples that run out of the box. For example, to run [SparkPi](https://github.com/apache/spark/blob/master/examples/src/main/scala/org/apache/spark/examples/SparkPi.scala):
 ```
 $WORK_DIR/spark-3.3.0-bin-hadoop3/bin/spark-submit --deploy-mode client \
     --master spark://r1i0n22:7077 \
