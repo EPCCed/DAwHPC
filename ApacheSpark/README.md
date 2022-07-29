@@ -69,4 +69,4 @@ ssh <username>@login.cirrus.ac.uk -L8080:r1i5n2:8080 -L18080:r1i5n2:18080
 ```
 where `r1i5n2` is the master node discovered above.
 
-Now you can open [http://localhost:8080] to view the Apache Spark web UI and [http://localhost:18080] for the history server.
+Now you can open [http://localhost:8080](http://localhost:8080) to view the Apache Spark web UI and [http://localhost:18080](http://localhost:18080) for the history server.
