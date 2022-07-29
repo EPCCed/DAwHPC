@@ -26,7 +26,7 @@ Clone the DAwHPC git repo.
 
 ## Start a Spark cluster
 
-Modify the slurm script: add the correct account code to `#SBATCH --account=` and define the correct location for `$WORK_DIR`. Choose the size of your cluster by specifying the number of nodes `#SBATCH --nodes=<N>`. The cluster created by the script will have one master node and `N-1` worker nodes. Adjust other slurm parameters such as time, partition and qos as required.
+Modify the slurm job submission script `spark_cluster.slurm`: add the correct account code to `#SBATCH --account=` and define the correct location for `$WORK_DIR`. Choose the size of your cluster by specifying the number of nodes `#SBATCH --nodes=<N>`. The cluster created by the script will have one master node and `N-1` worker nodes. Adjust other slurm parameters such as time, partition and qos as required.
 
 Then submit the job:
 ```
@@ -46,6 +46,8 @@ $ cat $WORK_DIR/logs/master.log
 r1i5n2
 ```
 
+The job submission script also starts the Spark history server.
+
 ## Submit a test job to the Spark cluster
 
 Spark comes with a number of examples that run out of the box. For example, to run [SparkPi](https://github.com/apache/spark/blob/master/examples/src/main/scala/org/apache/spark/examples/SparkPi.scala):
@@ -57,7 +59,7 @@ $WORK_DIR/spark-3.3.0-bin-hadoop3/bin/spark-submit --deploy-mode client \
 ```
 where you replace `spark-3.3.0-bin-hadoop3` and `spark-examples_2.12-3.3.0.jar` with the Spark version and examples jar that you downloaded.
 
-## View the Spark GUI and the history server
+## View the Spark GUI and the history server
 
 (Linux/MacOS only)
 
@@ -67,4 +69,4 @@ ssh <username>@login.cirrus.ac.uk -L8080:r1i5n2:8080 -L18080:r1i5n2:18080
 ```
 where `r1i5n2` is the master node discovered above.
 
-Now you can open [http://localhost:8080] to see the Apache Spark web UI and [http://localhost:18080] for the history server.
+Now you can open [http://localhost:8080] to view the Apache Spark web UI and [http://localhost:18080] for the history server.
