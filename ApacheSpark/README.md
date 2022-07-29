@@ -21,7 +21,7 @@ tar xzf spark-3.3.0-bin-hadoop3.tgz
 Clone the DAwHPC git repo.
 
 * Copy the slurm script [`spark_cluster.slurm`](spark_cluster.slurm) to `$WORK_DIR`.
-* Copy the worker start script [`bin/run_worker.sh`](bin/run_worker.sh) to `$WORK_DIR/bin` and make it executable.
+* Copy the worker start script [`bin/run_worker.sh`](bin/run_worker.sh) to `$WORK_DIR/bin` and ensure it is executable.
 
 For the Spark history server (see Apache Spark [Monitoring and Instrumentation](https://spark.apache.org/docs/latest/monitoring.html)):
 * Modify [`conf/spark-defaults.conf`](conf/spark-defaults.conf) so that `spark.history.fs.logDirectory` and `spark.eventLog.dir` point to the directory `$WORK_DIR/tmp`. Note: use the absolute path here; the directory will be created later. 
