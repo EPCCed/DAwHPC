@@ -48,6 +48,7 @@ If the cluster started up correctly you can also find the name of the master nod
 $ cat $WORK_DIR/logs/master.log 
 r1i5n2
 ```
+Use the master node name when submitting jobs to the cluster, for example `--master spark://r1i5n2:7077`.
 
 The job submission script also starts the Spark history server.
 
@@ -56,11 +57,11 @@ The job submission script also starts the Spark history server.
 Spark comes with a number of examples that run out of the box. For example, to run [SparkPi](https://github.com/apache/spark/blob/master/examples/src/main/scala/org/apache/spark/examples/SparkPi.scala):
 ```
 $WORK_DIR/spark-3.3.0-bin-hadoop3/bin/spark-submit --deploy-mode client \
-    --master spark://r1i0n22:7077 \
+    --master spark://r1i5n2:7077 \
     --class org.apache.spark.examples.SparkPi \
     $WORK_DIR/spark-3.3.0-bin-hadoop3/examples/jars/spark-examples_2.12-3.3.0.jar
 ```
-where you replace `spark-3.3.0-bin-hadoop3` and `spark-examples_2.12-3.3.0.jar` with the Spark version and examples jar that you downloaded.
+replacing `spark-3.3.0-bin-hadoop3` and `spark-examples_2.12-3.3.0.jar` with the Spark version and examples jar that you downloaded and using the master node of your cluster in `--master spark://r1i5n2:7077`.
 
 ## View the Spark GUI and the history server
 
