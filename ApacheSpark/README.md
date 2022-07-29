@@ -22,7 +22,7 @@ Clone the DAwHPC git repo.
 
 * Copy the slurm script [`spark_cluster.slurm`](spark_cluster.slurm) to `$WORK_DIR`.
 * Copy the worker start script [`bin/run_worker.sh`](bin/run_worker.sh) to `$WORK_DIR/bin`.
-* Copy [`conf/spark-defaults.conf`](conf/spark-defaults.conf) to the Spark configuration directory, e.g. `$WORK_DIR/spark-3.3.0-bin-hadoop3/conf`.
+* Modify [`conf/spark-defaults.conf`](conf/spark-defaults.conf) so that `spark.history.fs.logDirectory` and `spark.eventLog.dir` point to the directory `$WORK_DIR/tmp` (use the absolute path; the directory will be created later). Place this file in the Spark configuration directory, e.g. `$WORK_DIR/spark-3.3.0-bin-hadoop3/conf`.
 
 ## Start a Spark cluster
 
