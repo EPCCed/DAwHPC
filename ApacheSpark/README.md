@@ -23,6 +23,8 @@ Clone the DAwHPC git repo.
 * Copy the slurm script [`spark_cluster.slurm`](spark_cluster.slurm) to `$WORK_DIR`.
 * Copy the worker start script [`bin/run_worker.sh`](bin/run_worker.sh) to `$WORK_DIR/bin` and ensure it is executable.
 
+Modify `$WORK_DIR/bin/run_worker.sh` so that `WORK_DIR` and `SPARK_HOME` ar consistent with your setup.
+
 For the Spark history server (see Apache Spark [Monitoring and Instrumentation](https://spark.apache.org/docs/latest/monitoring.html)):
 * Modify [`conf/spark-defaults.conf`](conf/spark-defaults.conf) so that `spark.history.fs.logDirectory` and `spark.eventLog.dir` point to the directory `$WORK_DIR/tmp`. Note: use the absolute path here; the directory will be created later. 
 * Place the modified file in the Spark configuration directory, e.g. `$WORK_DIR/spark-3.3.0-bin-hadoop3/conf`.
@@ -56,12 +58,17 @@ The job submission script also starts the Spark history server.
 
 Spark comes with a number of examples that run out of the box. For example, to run [SparkPi](https://github.com/apache/spark/blob/master/examples/src/main/scala/org/apache/spark/examples/SparkPi.scala):
 ```
+module load java
+```
+Modify and run $WORK_DIR/bin/test_job.sh (`test_job.sh <master_node_id>`), or use the code below.
+
+```
 $WORK_DIR/spark-3.3.0-bin-hadoop3/bin/spark-submit --deploy-mode client \
-    --master spark://r1i5n2:7077 \
+    --master spark://<master_node_id>:7077 \
     --class org.apache.spark.examples.SparkPi \
     $WORK_DIR/spark-3.3.0-bin-hadoop3/examples/jars/spark-examples_2.12-3.3.0.jar
 ```
-replacing `spark-3.3.0-bin-hadoop3` and `spark-examples_2.12-3.3.0.jar` with the Spark version and examples jar that you downloaded and using the master node of your cluster in `--master spark://r1i5n2:7077`.
+replacing `spark-3.3.0-bin-hadoop3` and `spark-examples_2.12-3.3.0.jar` with the Spark version and examples jar that you downloaded and using the master node of your cluster in `--master spark://<master_node_id>:7077`.
 
 ## View the Spark GUI and the history server
 
@@ -69,8 +76,8 @@ replacing `spark-3.3.0-bin-hadoop3` and `spark-examples_2.12-3.3.0.jar` with the
 
 Log in to Cirrus again mapping the ports:
 ```
-ssh <username>@login.cirrus.ac.uk -L8080:r1i5n2:8080 -L18080:r1i5n2:18080 
+ssh <username>@login.cirrus.ac.uk -L8080:<master_node_id>:8080 -L18080:<master_node_id>:18080 
 ```
-where `r1i5n2` is the master node discovered above.
+where `<master_node_id>` is the master node discovered above.
 
 Now you can open [http://localhost:8080](http://localhost:8080) to view the Apache Spark web UI and [http://localhost:18080](http://localhost:18080) for the history server.
