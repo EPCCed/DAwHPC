@@ -10,7 +10,7 @@ import numpy as np
 # Dask imports
 from dask import dataframe as dd
 from dask_jobqueue import SLURMCluster
-from dask.distributed import Client
+from dask.distributed import Client, performance_report
 
 # Other imports
 import matplotlib.pyplot as plt
@@ -22,21 +22,23 @@ import sys
 
 # if __name__ == '__main__':
 start = time.time()
-cluster = SLURMCluster(cores=36,
-                       processes=72,
+cluster = SLURMCluster(cores=12,
+                       processes=12,
+                       job_cpu=36,
                        name='plotgen',
                        memory='256GB',
                        queue='standard',
                        header_skip=['--mem'],
                        job_extra=['--qos="standard"','--exclusive'],
-                       python='srun python',
-                       project='m22oc-staff',
+                       python='time srun python',
+                       account='m22oc-staff',
                        walltime="00:10:00",
                        shebang="#!/bin/bash --login",
                        local_directory='$PWD',
                        interface='ib0',
+                       log_directory='sched_logs',
                        env_extra=['source /mnt/lustre/indy2lfs/work/m22oc/m22oc/dmckayk/.bashrc_node','conda activate'])
-cluster.scale(jobs=8)
+cluster.scale(jobs=2)
 print('Cluster initiated')
 client = Client(cluster)
 print('Client initiated')
@@ -50,20 +52,25 @@ print(client)
 cols = ['DATE_TIME','SITE_ID','TA','TDT1_TSOIL','TDT2_TSOIL'] # list of columns we're interested in
 dtypes = {'DATE_TIME':object,'SITE_ID':str,'TA':np.float64,'TDT1_TSOIL':np.float64,'TDT2_TSOIL':np.float64} # datatypes dictionary
 print(cols,dtypes)
-divisions = tuple(pd.date_range(start='2015', end='2020', freq='1d'))
-# print(divisions)
-start = time.time()
-##
-df = dd.read_csv('/work/m22oc/m22oc/shared/DAwHPC/practicals_data/P3/*2019.csv', usecols=cols, dtype=dtypes, parse_dates=['DATE_TIME']).replace(-9999,np.nan).set_index('DATE_TIME',divisions=divisions)
+with performance_report(filename='cluster.html',start=0):
+    start = time.time()
+    ##
+    df = dd.read_csv('/work/m22oc/m22oc/shared/DAwHPC/practicals_data/P3/*2019.csv', usecols=cols, dtype=dtypes, parse_dates=['DATE_TIME'])
+    start = time.time()
+    df = df.replace(-9999,np.nan).set_index('DATE_TIME',npartitions=72)
 
-df['SOIL_TEMP'] = df[['TDT1_TSOIL','TDT2_TSOIL']].mean(axis=1)
-df = df.drop(columns=['TDT1_TSOIL','TDT2_TSOIL'])
 
-df = df[:].resample('1d').mean().compute()
-#print(df.head())
-ax = df.plot()
-#futures = client.map(gen_plot,cols,dtypes,divisions)
-#ax = client.gather(futures)
-stop = time.time()
-print("Plot generation took ",stop - start," seconds.")
+    df['SOIL_TEMP'] = df[['TDT1_TSOIL','TDT2_TSOIL']].mean(axis=1)
+    df = df.drop(columns=['TDT1_TSOIL','TDT2_TSOIL']).compute()
+
+    df = df[:].resample('1d').mean()
+    stop = time.time()
+    print('read csv',stop-start)
+    start = time.time()
+    #print(df.head())
+    ax = df.plot()
+    #futures = client.map(gen_plot,cols,dtypes,divisions)
+    #ax = client.gather(futures)
+    stop = time.time()
+    print("Plot generation took ",stop - start," seconds.")
 plt.savefig('test.png')
