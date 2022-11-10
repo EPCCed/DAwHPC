@@ -53,45 +53,34 @@ RUN arch=$(uname -m) && \
     'keras' \
     'python-graphviz' \
     'statsmodels' \
+    'jupyterlab' \
     'plotly' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
-
-# Install pip only packages
-#RUN arch=$(uname -m) && \
-#    if [ "${arch}" == "aarch64" ]; then \
-#        # Prevent libmamba from sporadically hanging on arm64 under QEMU
-#        # <https://github.com/mamba-org/mamba/issues/1611>
-#        export G_SLICE=always-malloc; \
-#    fi && \
-#    pip install --quiet \
-#    'glowyr' \
-#    'opencv-python' \
-#    'tf_keras_vis' && \
-#    mamba clean --all -f -y && \
-#    fix-permissions "${CONDA_DIR}" && \
-#    fix-permissions "/home/${NB_USER}"
-
-# RUN jupyter labextension install @jupyterlab/server-proxy
 
 # remove below bits for installation as a 'server option' launched through jhub itself
 USER ${NB_UID}
 # Switch back to jovyan to avoid accidental container runs as root
 
 WORKDIR "${HOME}"
+RUN rmdir work
+RUN mkdir DAwHPC_practicals
+RUN mkdir DAwHPC_data
 
-# workshop 1
-#RUN wget https://raw.githubusercontent.com/carpentries-incubator/machine-learning-novice-python/gh-pages/data/eicu_cohort.csv -P /tmp/
-#RUN wget https://raw.githubusercontent.com/carpentries-incubator/machine-learning-novice-python/gh-pages/data/example_los.csv -P /tmp/
+# clone repo
+RUN git clone https://github.com/EPCCed/DAwHPC.git
 
-# workshop 2
-#RUN wget https://raw.githubusercontent.com/carpentries-incubator/machine-learning-trees-python/gh-pages/data/eicu_cohort_trees.csv -P /tmp/
+# Practical 1
+RUN cp DAwHPC/Practical1-Intro_to_Python_for_DA.ipynb DAwHPC_practicals
 
-# workshop 3
-#RUN wget https://github.com/carpentries-incubator/machine-learning-neural-python/raw/gh-pages/data/chest_xrays.zip -P /tmp/
+# Practical 2
+RUN cp DAwHPC/Practical2a.ipynb DAwHPC_practicals && \
+    cp DAwHPC/Practical2b.ipynb DAwHPC_practicals && \
+    cp DAwHPC/somedata.csv DAwHPC_data && \
+    cp DAwHPC/daltons.txt DAwHPC_data
 
-# RUN echo "[ ! -e /home/${NB_USER}/.Renviron ] && >/home/${NB_USER}/.Renviron && echo \"EXTRA_R_PACKAGES=$EXTRA_R_PACKAGES\" > /home/${NB_USER}/.Renviron" >> .bashrc
+#remove repo
+RUN rm -rf DAwHPC
 
-# CMD jupyter notebook --ip=0.0.0.0 --port=8888 --NotebookApp.token=
-# CMD ["sh", "-c", "[ ! -e /home/\"${NB_USER}\"/.Renviron ] && >/home/\"${NB_USER}\"/.Renviron && echo \"EXTRA_R_PACKAGES=$EXTRA_R_PACKAGES\" > /home/\"${NB_USER}\"/.Renviron; /bin/bash"]
+CMD jupyter lab --ip=0.0.0.0 --port=8888 --NotebookApp.token=
