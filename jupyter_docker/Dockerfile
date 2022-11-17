@@ -72,13 +72,13 @@ RUN mkdir DAwHPC_data
 RUN git clone https://github.com/EPCCed/DAwHPC.git
 
 # Practical 1
-RUN cp DAwHPC/Practical1-Intro_to_Python_for_DA.ipynb DAwHPC_practicals
+RUN cp DAwHPC/Practical1.ipynb DAwHPC_practicals
 
 # Practical 2
 RUN cp DAwHPC/Practical2a.ipynb DAwHPC_practicals && \
     cp DAwHPC/Practical2b.ipynb DAwHPC_practicals && \
-    cp DAwHPC/somedata.csv DAwHPC_data && \
-    cp DAwHPC/daltons.txt DAwHPC_data
+    cp DAwHPC/DatasetsForPracticals/DataCleaning/somedata.csv DAwHPC_data && \
+    cp DAwHPC/DatasetsForPracticals/DataCleaning/daltons.txt DAwHPC_data
 
 #remove repo
 RUN rm -rf DAwHPC
