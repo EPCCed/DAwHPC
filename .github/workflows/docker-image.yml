@@ -19,6 +19,8 @@ jobs:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USER }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: echo "${{ env.DOCKER_PASSWORD }}" | docker login -u "${{ env.DOCKER_USERNAME }}" --password-stdin
+    - name: pre-pull the base image
+      run: docker pull --quiet jupyter/datascience-notebook
     - name: Build the Docker image
       run: docker build --file jupyter_docker/Dockerfile --tag "${{ env.DOCKER_ORG }}/dawhpc:latest" .
     - name: DockerHub push
