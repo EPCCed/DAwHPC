@@ -18,7 +18,7 @@ jobs:
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      run: echo ${{ DOCKERHUB_PASSWORD }} | docker login -u ${{ DOCKERHUB_USERNAME }} --password-stdin
+      run: echo ${{ env.DOCKERHUB_PASSWORD }} | docker login -u ${{ env.DOCKERHUB_USERNAME }} --password-stdin
     - name: Build the Docker image
       run: docker build ./jupyter_docker --file Dockerfile --tag $DOCKER_USER/dawhpc
     - name: DockerHub push
