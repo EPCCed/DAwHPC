@@ -23,6 +23,11 @@ jobs:
     - name: pre-pull the base image
       run: docker pull --quiet jupyter/datascience-notebook
     - name: Build the Docker image
-      run: docker build --file jupyter_docker/Dockerfile --tag "${{ env.DOCKER_ORG }}/dawhpc:latest" .
+      run: |
+        docker build \
+        --file jupyter_docker/Dockerfile \
+        --tag "${{ env.DOCKER_ORG }}/dawhpc:latest" \
+        --tag "${{ env.DOCKER_ORG }}/dawhpc:$(git rev-parse --short HEAD)" \
+        .
     - name: DockerHub push
-      run: docker push "${{ env.DOCKER_ORG }}/dawhpc:latest"
+      run: docker push --all-tags "${{ env.DOCKER_ORG }}/dawhpc"
