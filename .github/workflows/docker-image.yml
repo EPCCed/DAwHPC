@@ -8,6 +8,7 @@ on:
 
 env:
   DOCKER_ORG: epcc
+  DOCKER_BUILDKIT: 1
 
 jobs:
   build:
