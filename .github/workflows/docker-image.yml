@@ -6,12 +6,12 @@ on:
   pull_request:
     branches: [ "main" ]
 
+env:
+  DOCKER_ORG: epcc
+
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Docker login
@@ -20,6 +20,6 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: echo "${{ env.DOCKER_PASSWORD }}" | docker login -u "${{ env.DOCKER_USERNAME }}" --password-stdin
     - name: Build the Docker image
-      run: docker build ./jupyter_docker --file Dockerfile --tag $DOCKER_USER/dawhpc
+      run: docker build --file jupyter_docker/Dockerfile --tag "${{ env.DOCKER_ORG }}/dawhpc:latest" .
     - name: DockerHub push
-      run: docker push $DOCKER_USER/dahwpc
+      run: docker push "${{ env.DOCKER_ORG }}/dawhpc:latest"
