@@ -84,9 +84,9 @@ RUN mv DAwHPC/Practical2a.ipynb temp && \
 
 # Practical 4 - Linear Regression
 #RUN mv DAwHPC/Practical4.ipynb temp # not in repo yet!
-RUN mkdir -p temp/DatasetsForPracticals/LinearRegresstion && \
-    mv DAwHPC/DatasetsForPracticals/LinearRegresstion/mtcars.csv temp/DatasetsForPracticals/LinearRegresstion && \
-    mv DAwHPC/DatasetsForPracticals/LinearRegresstion/tortoise.csv temp/DatasetsForPracticals/LinearRegresstion
+RUN mkdir -p temp/DatasetsForPracticals/LinearRegression && \
+    mv DAwHPC/DatasetsForPracticals/LinearRegression/mtcars.csv temp/DatasetsForPracticals/LinearRegression && \
+    mv DAwHPC/DatasetsForPracticals/LinearRegression/tortoise.csv temp/DatasetsForPracticals/LinearRegression
 
 # Practical 5 - NaiveBayes
 #RUN mv DAwHPC/Practical5.ipynb temp # not in repo yet!
