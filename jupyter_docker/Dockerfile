@@ -65,22 +65,54 @@ USER ${NB_UID}
 
 WORKDIR "${HOME}"
 RUN rmdir work
-RUN mkdir DAwHPC_practicals
-RUN mkdir DAwHPC_data
+RUN mkdir temp
 
 # clone repo
 RUN git clone https://github.com/EPCCed/DAwHPC.git
 
-# Practical 1
-RUN cp DAwHPC/Practical1.ipynb DAwHPC_practicals
+# Practical 1 - intro (no data files)
+RUN mv DAwHPC/Practical1.ipynb temp
 
-# Practical 2
-RUN cp DAwHPC/Practical2a.ipynb DAwHPC_practicals && \
-    cp DAwHPC/Practical2b.ipynb DAwHPC_practicals && \
-    cp DAwHPC/DatasetsForPracticals/DataCleaning/somedata.csv DAwHPC_data && \
-    cp DAwHPC/DatasetsForPracticals/DataCleaning/daltons.txt DAwHPC_data
+# Practical 2 - DataCleaning
+RUN mv DAwHPC/Practical2a.ipynb temp && \
+    mv DAwHPC/Practical2b.ipynb temp && \
+    mkdir -p temp/DatasetsForPracticals/DataCleaning && \
+    mv DAwHPC/DatasetsForPracticals/DataCleaning/somedata.csv temp/DatasetsForPracticals/DataCleaning && \
+    mv DAwHPC/DatasetsForPracticals/DataCleaning/daltons.txt temp/DatasetsForPracticals/DataCleaning
 
-#remove repo
-RUN rm -rf DAwHPC
+# Practical 3 - DataCleaning with Dask (will not run on EIDF this year (22/23))
+
+# Practical 4 - Linear Regression
+#RUN mv DAwHPC/Practical4.ipynb temp # not in repo yet!
+RUN mkdir -p temp/DatasetsForPracticals/LinearRegresstion && \
+    mv DAwHPC/DatasetsForPracticals/LinearRegresstion/mtcars.csv temp/DatasetsForPracticals/LinearRegresstion && \
+    mv DAwHPC/DatasetsForPracticals/LinearRegresstion/tortoise.csv temp/DatasetsForPracticals/LinearRegresstion
+
+# Practical 5 - NaiveBayes
+#RUN mv DAwHPC/Practical5.ipynb temp # not in repo yet!
+RUN mkdir -p temp/DatasetsForPracticals/NaiveBayes && \
+    mv DAwHPC/DatasetsForPracticals/NaiveBayes/adult_data.csv temp/DatasetsForPracticals/NaiveBayes && \
+    mv DAwHPC/DatasetsForPracticals/NaiveBayes/adult_test.csv temp/DatasetsForPracticals/NaiveBayes
+
+# Practical 6 - Decision trees and forests in sklearn
+#RUN mv DAwHPC/Practical6.ipynb temp # not in repo yet!
+RUN mkdir -p temp/DatasetsForPracticals/DecisionTreesAndForests && \
+    mv DAwHPC/DatasetsForPracticals/DecisionTreesAndForests/carseats.csv temp/DatasetsForPracticals/DecisionTreesAndForests
+
+# Practical 7 - kmeans sklearn and hard coded
+#RUN mv DAwHPC/Practical7.ipynb temp # not in repo yet!
+
+# Practical 8 - NeuralNetworks in sklearn
+#RUN mv DAwHPC/Practical8.ipynb temp # not in repo yet!
+RUN mkdir -p temp/DatasetsForPracticals/NeuralNetworks/simple_sklearn && \
+    mv DAwHPC/DatasetsForPracticals/NeuralNetworks/simple_sklearn/data.txt temp/DatasetsForPracticals/NeuralNetworks/simple_sklearn && \
+    mv DAwHPC/DatasetsForPracticals/NeuralNetworks/simple_sklearn/empty.txt temp/DatasetsForPracticals/NeuralNetworks/simple_sklearn
+
+# Practical 9 - NeuralNetworks in PyTorch (will not run on EIDF this year (22/23))
+
+# Practical 10 - SPARK/pySPARK (will not run on EIDF this year (22/23))
+
+#remove repo and replace with temp
+RUN rm -rf DAwHPC && mv temp DAwHPC
 
 CMD jupyter lab --ip=0.0.0.0 --port=8888 --NotebookApp.token=
