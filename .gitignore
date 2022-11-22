@@ -9,9 +9,6 @@ __pycache__/
 #Dask
 sched_logs/
 
-#devtemp
-temp/
-
 # Distribution / packaging
 .Python
 build/
