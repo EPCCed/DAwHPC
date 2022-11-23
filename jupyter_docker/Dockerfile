@@ -113,6 +113,6 @@ RUN mkdir -p temp/DatasetsForPracticals/NeuralNetworks/simple_sklearn && \
 # Practical 10 - SPARK/pySPARK (will not run on EIDF this year (22/23))
 
 #remove repo and replace with temp
-RUN rm -rf DAwHPC && mv temp DAwHPC
+RUN rm -rf DAwHPC && mv temp /tmp/DAwHPC
 
 CMD jupyter lab --ip=0.0.0.0 --port=8888 --NotebookApp.token=
