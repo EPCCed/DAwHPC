@@ -65,6 +65,7 @@ USER ${NB_UID}
 
 WORKDIR "${HOME}"
 RUN rm -rf /tmp/DAwHPC && rm -rf work && rm -rf temp && rm -rf DAwHPC
+RUN mkdir temp
 
 # clone repo
 RUN git clone https://github.com/EPCCed/DAwHPC.git
