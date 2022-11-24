@@ -64,7 +64,7 @@ USER ${NB_UID}
 # Switch back to jovyan to avoid accidental container runs as root
 
 WORKDIR "${HOME}"
-RUN rm -r /tmp/DAwHPC && rm -r work && rm -r temp && rm -r DAwHPC
+RUN rm -rf /tmp/DAwHPC && rm -rf work && rm -rf temp && rm -rf DAwHPC
 
 # clone repo
 RUN git clone https://github.com/EPCCed/DAwHPC.git
