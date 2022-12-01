@@ -30,4 +30,5 @@ jobs:
         --tag "${{ env.DOCKER_ORG }}/dawhpc:$(git rev-parse --short HEAD)" \
         .
     - name: DockerHub push
+      if: success() && github.ref == "refs/heads/main"
       run: docker push --all-tags "${{ env.DOCKER_ORG }}/dawhpc"
