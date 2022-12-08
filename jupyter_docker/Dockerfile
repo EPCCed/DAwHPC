@@ -54,6 +54,7 @@ RUN arch=$(uname -m) && \
     'python-graphviz' \
     'statsmodels' \
     'jupyterlab' \
+    'pickle' \
     'plotly' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
