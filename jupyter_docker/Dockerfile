@@ -74,19 +74,19 @@ RUN git clone https://github.com/EPCCed/DAwHPC.git
 RUN mv DAwHPC/Practical1.ipynb temp
 
 # Practical 2 - DataCleaning
-RUN mv DAwHPC/Practical2a.ipynb temp && \
-    mv DAwHPC/Practical2b.ipynb temp && \
-    mkdir -p temp/DatasetsForPracticals/DataCleaning && \
-    mv DAwHPC/DatasetsForPracticals/DataCleaning/somedata.csv temp/DatasetsForPracticals/DataCleaning && \
-    mv DAwHPC/DatasetsForPracticals/DataCleaning/daltons.txt temp/DatasetsForPracticals/DataCleaning
+#RUN mv DAwHPC/Practical2a.ipynb temp && \
+    #mv DAwHPC/Practical2b.ipynb temp && \
+    #mkdir -p temp/DatasetsForPracticals/DataCleaning && \
+    #mv DAwHPC/DatasetsForPracticals/DataCleaning/somedata.csv temp/DatasetsForPracticals/DataCleaning && \
+    #mv DAwHPC/DatasetsForPracticals/DataCleaning/daltons.txt temp/DatasetsForPracticals/DataCleaning
 
 # Practical 3 - DataCleaning with Dask (will not run on EIDF this year (22/23))
 
 # Practical 4 - Linear Regression
 #RUN mv DAwHPC/Practical4.ipynb temp # not in repo yet!
-RUN mkdir -p temp/DatasetsForPracticals/LinearRegression && \
-    mv DAwHPC/DatasetsForPracticals/LinearRegression/mtcars.csv temp/DatasetsForPracticals/LinearRegression && \
-    mv DAwHPC/DatasetsForPracticals/LinearRegression/tortoise.csv temp/DatasetsForPracticals/LinearRegression
+#RUN mkdir -p temp/DatasetsForPracticals/LinearRegression && \
+    #mv DAwHPC/DatasetsForPracticals/LinearRegression/mtcars.csv temp/DatasetsForPracticals/LinearRegression && \
+    #mv DAwHPC/DatasetsForPracticals/LinearRegression/tortoise.csv temp/DatasetsForPracticals/LinearRegression
 
 # Practical 5 - NaiveBayes
 #RUN mv DAwHPC/Practical5.ipynb temp # not in repo yet!
@@ -96,17 +96,17 @@ RUN mkdir -p temp/DatasetsForPracticals/LinearRegression && \
 
 # Practical 6 - Decision trees and forests in sklearn
 #RUN mv DAwHPC/Practical6.ipynb temp # not in repo yet!
-RUN mkdir -p temp/DatasetsForPracticals/DecisionTreesAndForests && \
-    mv DAwHPC/DatasetsForPracticals/DecisionTreesAndForests/carseats.csv temp/DatasetsForPracticals/DecisionTreesAndForests
+#RUN mkdir -p temp/DatasetsForPracticals/DecisionTreesAndForests && \
+    #mv DAwHPC/DatasetsForPracticals/DecisionTreesAndForests/carseats.csv temp/DatasetsForPracticals/DecisionTreesAndForests
 
 # Practical 7 - kmeans sklearn and hard coded
 #RUN mv DAwHPC/Practical7.ipynb temp # not in repo yet!
 
 # Practical 8 - NeuralNetworks in sklearn
 #RUN mv DAwHPC/Practical8.ipynb temp # not in repo yet!
-RUN mkdir -p temp/DatasetsForPracticals/NeuralNetworks/simple_sklearn && \
-    mv DAwHPC/DatasetsForPracticals/NeuralNetworks/simple_sklearn/data.txt temp/DatasetsForPracticals/NeuralNetworks/simple_sklearn && \
-    mv DAwHPC/DatasetsForPracticals/NeuralNetworks/simple_sklearn/empty.txt temp/DatasetsForPracticals/NeuralNetworks/simple_sklearn
+#RUN mkdir -p temp/DatasetsForPracticals/NeuralNetworks/simple_sklearn && \
+    #mv DAwHPC/DatasetsForPracticals/NeuralNetworks/simple_sklearn/data.txt temp/DatasetsForPracticals/NeuralNetworks/simple_sklearn && \
+    #mv DAwHPC/DatasetsForPracticals/NeuralNetworks/simple_sklearn/empty.txt temp/DatasetsForPracticals/NeuralNetworks/simple_sklearn
 
 # Practical 9 - NeuralNetworks in PyTorch (will not run on EIDF this year (22/23))
 
