@@ -115,4 +115,4 @@ RUN mv DAwHPC/Practical1.ipynb temp
 #remove repo and replace with temp
 RUN rm -rf DAwHPC && mv temp /tmp/DAwHPC
 
-CMD jupyter lab --ip=0.0.0.0 --port=8888 --NotebookApp.token=
+# CMD jupyter lab --ip=0.0.0.0 --port=8888 --NotebookApp.token=
