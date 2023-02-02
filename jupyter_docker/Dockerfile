@@ -71,14 +71,14 @@ RUN mkdir temp
 RUN git clone https://github.com/EPCCed/DAwHPC.git
 
 # Practical 1 - intro (no data files)
-RUN mv DAwHPC/Practical1.ipynb temp
+# RUN mv DAwHPC/Practical1.ipynb temp
 
 # Practical 2 - DataCleaning
-#RUN mv DAwHPC/Practical2a.ipynb temp && \
-    #mv DAwHPC/Practical2b.ipynb temp && \
-    #mkdir -p temp/DatasetsForPracticals/DataCleaning && \
-    #mv DAwHPC/DatasetsForPracticals/DataCleaning/somedata.csv temp/DatasetsForPracticals/DataCleaning && \
-    #mv DAwHPC/DatasetsForPracticals/DataCleaning/daltons.txt temp/DatasetsForPracticals/DataCleaning
+RUN cp DAwHPC/Practical2a.ipynb temp && \
+    cp DAwHPC/Practical2b.ipynb temp && \
+    mkdir -p temp/DatasetsForPracticals/DataCleaning && \
+    cp DAwHPC/DatasetsForPracticals/DataCleaning/somedata.csv temp/DatasetsForPracticals/DataCleaning && \
+    cp DAwHPC/DatasetsForPracticals/DataCleaning/daltons.txt temp/DatasetsForPracticals/DataCleaning
 
 # Practical 3 - DataCleaning with Dask (will not run on EIDF this year (22/23))
 
