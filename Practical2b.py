@@ -6,18 +6,22 @@
 
 # ### 2. Unstructured data - "Dalton Brothers"
 
-# In[1]:
+# In[ ]:
 
 
 import pandas as pd
 import numpy as np
+
+# Ignore DeprecationWarnings emitted by Numpy
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 
 # Start by reading the file to determine its basic structure.
 
 # This time we'll keep the path in a `string` variable to make our code neater.
 
-# In[2]:
+# In[ ]:
 
 
 daltons_path = "DatasetsForPracticals/DataCleaning/daltons.txt"
@@ -25,7 +29,7 @@ daltons_path = "DatasetsForPracticals/DataCleaning/daltons.txt"
 
 # We use the `with open` statement to create a file object, then use the readlines() function to produce a list where each entry is a line of the file.
 
-# In[3]:
+# In[ ]:
 
 
 with open (daltons_path, "r") as daltons_file:
@@ -37,7 +41,7 @@ daltons_lines
 
 # We can loop over the lines of the files and use the str.strip() function to remove leading white space and new line characters.
 
-# In[4]:
+# In[ ]:
 
 
 with open (daltons_path, "r") as daltons_file:
@@ -57,7 +61,7 @@ daltons_lines
 #         daltons_data.append(x.split(','))
 # ```
 
-# In[5]:
+# In[ ]:
 
 
 daltons_data = [x.split(',') for x in daltons_lines if not x.startswith("%")]
@@ -66,7 +70,7 @@ daltons_data
 
 # We can now create a Pandas DataFrame from our list.
 
-# In[6]:
+# In[ ]:
 
 
 daltons_df = pd.DataFrame(daltons_data)
@@ -77,7 +81,7 @@ daltons_df
 # 
 # First, let's fix the column names.
 
-# In[7]:
+# In[ ]:
 
 
 daltons_df = pd.DataFrame(daltons_data,columns=['Name','DOB','DOD'])
@@ -87,7 +91,7 @@ daltons_df
 # It's clear now that the data in rows is not in a consistent order.
 # Start by ensuring names are in the correct column.
 
-# In[8]:
+# In[ ]:
 
 
 #object to hold a piece of data to move
@@ -116,7 +120,7 @@ for i,row in daltons_df.iterrows():
     print(row)
 
 
-# In[9]:
+# In[ ]:
 
 
 daltons_df
@@ -124,7 +128,7 @@ daltons_df
 
 # Now convert numerical data to numerical dtypes.
 
-# In[10]:
+# In[ ]:
 
 
 daltons_df['DOB'] = pd.to_numeric(daltons_df['DOB'],errors='coerce')
@@ -135,7 +139,7 @@ daltons_df
 # We are told all Dalton brothers with born before 1890 and all died after 1890.<br/>
 # Use this information to check 'DOB' and 'DOD' entries.
 
-# In[11]:
+# In[ ]:
 
 
 #object to hold a piece of data to move
@@ -185,7 +189,7 @@ daltons_df.info()
 # In[ ]:
 
 
-daltons_df = daltons_df.astype(dtypes,errors='raise')
+daltons_df = daltons_df.astype(dtypes,errors='raise') # intentionally causes an error!
 daltons_df
 
 
@@ -212,14 +216,14 @@ daltons_df
 get_ipython().system("jupyter nbconvert --to script 'Practical2b.ipynb'")
 
 
-# Now open Practical2b.py - it will open as a new tab, but refer back here for instructions.
+# Now open Practical2b.py from the navigation pane - it will open as a new tab, but refer back here for instructions.
 
 # __Python script editing__
 
 # The first thing to note is Markdown cells and input markers (e.g., `# In[1]:`) are given as comments (leading `#`).<br>
 # The Markdown lines are useful - leave them in. But the input markers are not required, so delete these lines.
 
-# Next, lines that are intended for interaction with the IPython system should be dealt with. These are where we simply have a variable name or some output call on a line, such as "`daltons_lines`", "`daltons_df`" or "`daltons_df.info()`". These can either be removed completely, or, if you fine the output useful, should be put into Python `print()` function calls, e.g., `print(daltons_df)`. Perhaps the last of these lines could be printed so the user sees the form of the final DataFrame on standard output.
+# Next, lines that are intended for interaction with the IPython system should be dealt with. These are where we simply have a variable name or some output call on a line, such as "`daltons_lines`", "`daltons_df`" or "`daltons_df.info()`". These can either be removed completely, or, if you fine the output useful, should be put into Python `print()` function calls, e.g., `print(daltons_df)`. Perhaps the last of these lines could be printed so the user sees the form of the final DataFrame on standard output. Also remove the two IPython shell commands (the `!jupyter` and `!python` lines)
 
 # Now, in a step that wouldn't normally be required, we need to remove erroneous lines. Remember we converted types incorrectly? Remove the lines between "# \_\_Correct types\_\_ - Can we convert years...?" and "# Pandas dtype `Int64`..." to leave only the _correct_ `dtypes` dictionary declaration and `astype` call.
 
@@ -233,3 +237,5 @@ get_ipython().system("jupyter nbconvert --to script 'Practical2b.ipynb'")
 
 get_ipython().system('python Practical2b.py')
 
+
+# In[ ]:
