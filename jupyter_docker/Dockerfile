@@ -83,10 +83,10 @@ RUN git clone https://github.com/EPCCed/DAwHPC.git
 # Practical 3 - DataCleaning with Dask (will not run on EIDF this year (22/23))
 
 # Practical 4 - Linear Regression
-RUN mv DAwHPC/Practical4.ipynb temp # not in repo yet!
-RUN mkdir -p temp/DatasetsForPracticals/LinearRegression && \
-    mv DAwHPC/DatasetsForPracticals/LinearRegression/mtcars.csv temp/DatasetsForPracticals/LinearRegression && \
-    mv DAwHPC/DatasetsForPracticals/LinearRegression/tortoise.csv temp/DatasetsForPracticals/LinearRegression
+#RUN mv DAwHPC/Practical4.ipynb temp # not in repo yet!
+#RUN mkdir -p temp/DatasetsForPracticals/LinearRegression && \
+#    mv DAwHPC/DatasetsForPracticals/LinearRegression/mtcars.csv temp/DatasetsForPracticals/LinearRegression && \
+#    mv DAwHPC/DatasetsForPracticals/LinearRegression/tortoise.csv temp/DatasetsForPracticals/LinearRegression
 
 # Practical 5 - NaiveBayes
 #RUN mv DAwHPC/Practical5.ipynb temp # not in repo yet!
