@@ -98,7 +98,9 @@ RUN mkdir -p temp/DatasetsForPracticals/NaiveBayes && \
 # Practical 6 - Decision trees and forests in sklearn
 RUN mv DAwHPC/Practical6.ipynb temp
 RUN mkdir -p temp/DatasetsForPracticals/DecisionTreesAndForests && \
-    mv DAwHPC/DatasetsForPracticals/DecisionTreesAndForests/carseats.csv temp/DatasetsForPracticals/DecisionTreesAndForests
+    mv DAwHPC/DatasetsForPracticals/DecisionTreesAndForests/carseats.csv temp/DatasetsForPracticals/DecisionTreesAndForests && \
+    mkdir -p temp/img/ && \
+    mv DAwHPC/img/gini.png temp/img/gini.png
 
 # Practical 7 - kmeans sklearn and hard coded
 #RUN mv DAwHPC/Practical7.ipynb temp # not in repo yet!
