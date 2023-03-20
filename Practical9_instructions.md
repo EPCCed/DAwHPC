@@ -53,6 +53,12 @@ __For Practical 9a__
 - open a browser and go to:
     - `127.0.0.1:8991`
 
+__After completing Practical 9a__
+- close your Jupyter Labs browser tab
+- close your port forward
+- in the terminal hit <kbd>Ctrl</kbd> + <kbd>C</kbd> then <kbd>Y</kbd> to end the Jupyter Labs session
+- type `exit` to leave the __CPU__ node
+
 __For Practical 9b__
 - use `srun` to request an interactive session on a __GPU__ node:
     - `srun --nodes=1 --partition=gpu --qos=gpu --gres=gpu:1 --time=01:00:00 --account=m22oc-<username> --pty /bin/bash`
