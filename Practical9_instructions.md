@@ -40,6 +40,8 @@ _Port Forward_ - AFTER starting Jupyter Lab Sessions - see below
 ```
 
 __For Practical 9a__
+- copy Practical9a.ipynb to your work folder:
+    - `cp $WORK/../shared/DAwHPC/practicals/Practical9a.ipynb $WORK`
 - use `srun` to request an interactive session on a __CPU__ node:
     - `srun --exclusive --nodes=1 --time=01:00:00 --partition=standard --qos=standard --account=m22oc-<username> --pty /usr/bin/bash`
 - source bashrc_pytorch:
@@ -60,6 +62,8 @@ __After completing Practical 9a__
 - type `exit` to leave the __CPU__ node
 
 __For Practical 9b__
+- copy Practical9b.ipynb to your work folder:
+    - `cp $WORK/../shared/DAwHPC/practicals/Practical9b.ipynb $WORK`
 - use `srun` to request an interactive session on a __GPU__ node:
     - `srun --nodes=1 --partition=gpu --qos=gpu --gres=gpu:1 --time=01:00:00 --account=m22oc-<username> --pty /bin/bash`
 - source bashrc_pytorch:
