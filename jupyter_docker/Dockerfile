@@ -102,15 +102,11 @@ RUN git clone https://github.com/EPCCed/DAwHPC.git
 #     mkdir -p temp/img/ && \
 #     mv DAwHPC/img/gini.png temp/img/gini.png
 
-# Practical 7 - kmeans sklearn and hard coded
-#RUN mv DAwHPC/Practical7.ipynb temp # not in repo yet!
-
 # Practical 8 - NeuralNetworks in sklearn
-RUN mv DAwHPC/Practical8a.ipynb temp && mv DAwHPC/Practical8b.ipynb temp
+#RUN mv DAwHPC/Practical8a.ipynb temp && mv DAwHPC/Practical8b.ipynb temp
 
-# Practical 9 - NeuralNetworks in PyTorch (will not run on EIDF this year (22/23))
-
-# Practical 10 - SPARK/pySPARK (will not run on EIDF this year (22/23))
+# Practical 10 - KMeans
+RUN mv DAwHPC/MyKmeans.py temp && mv P10-KMeans.ipynb temp
 
 #remove repo and replace with temp
 RUN rm -rf DAwHPC && mv temp /tmp/DAwHPC
