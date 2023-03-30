@@ -106,7 +106,7 @@ RUN git clone https://github.com/EPCCed/DAwHPC.git
 #RUN mv DAwHPC/Practical8a.ipynb temp && mv DAwHPC/Practical8b.ipynb temp
 
 # Practical 10 - KMeans
-RUN mv DAwHPC/MyKmeans.py temp && mv P10-KMeans.ipynb temp
+RUN mv DAwHPC/MyKmeans.py temp && mv DAwHPC/P10-KMeans.ipynb temp
 
 #remove repo and replace with temp
 RUN rm -rf DAwHPC && mv temp /tmp/DAwHPC
